@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dibujo con Canvas</title>
+</head>
+<body onload="dibujar();">
+
+  <h2>Figuras básicas en Canvas</h2>
+  <canvas id="miCanvas" width="400" height="300" style="border:1px solid black;">
+    Tu navegador no admite el elemento &lt;canvas&gt;.
+  </canvas>
+
+  <script>
+    function dibujar() {
+      const canvas = document.getElementById("miCanvas");
+      if (canvas.getContext) {
+        const ctx = canvas.getContext("2d");
+
+        // === RECTÁNGULOS ===
+        ctx.fillStyle = "blue";
+        ctx.fillRect(25, 25, 100, 100); // rectángulo relleno
+
+        ctx.clearRect(45, 45, 60, 60); // borrar parte central
+
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(50, 50, 50, 50); // contorno
+
+        // === TRIÁNGULO ===
+        ctx.beginPath();
+        ctx.moveTo(200, 125);
+        ctx.lineTo(150, 45);
+        ctx.lineTo(250, 45);
+        ctx.closePath();
+        ctx.strokeStyle = "red";
+        ctx.stroke();
+
+        // === CÍRCULO (Cara sonriente) ===
+        ctx.beginPath();
+        ctx.arc(320, 100, 40, 0, Math.PI * 2, true); // cara
+        ctx.moveTo(305, 90);
+        ctx.arc(295, 90, 5, 0, Math.PI * 2, true); // ojo izquierdo
+        ctx.moveTo(350, 90);
+        ctx.arc(340, 90, 5, 0, Math.PI * 2, true); // ojo derecho
+        ctx.moveTo(340, 110);
+        ctx.arc(320, 110, 20, 0, Math.PI, false); // sonrisa
+        ctx.strokeStyle = "green";
+        ctx.stroke();
+      }
+    }
+  </script>
+</body>
+</html>

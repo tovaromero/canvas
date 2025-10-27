@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rebote Diagonal - Canvas</title>
+  <style>
+    canvas {
+      border: 2px solid black;
+      display: block;
+      margin: 20px auto;
+      background-color: #f5f5f5;
+    }
+    h2 {
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h2> Movimiento con Rebote en Canvas</h2>
+  <canvas id="canvas" width="400" height="300"></canvas>
+
+  <script>
+    // Obtener el contexto del canvas
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    // Posición inicial del cuadrado
+    let x = 50;
+    let y = 50;
+
+    // Velocidad en los dos ejes
+    let speedX = 3;
+    let speedY = 3;
+
+    // Tamaño del cuadrado
+    const size = 30;
+
+    // Función que dibuja y actualiza el movimiento
+    function animateDiagonal() {
+      // Limpiar el canvas en cada frame
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Dibujar el cuadrado
+      ctx.fillStyle = "red";
+      ctx.fillRect(x, y, size, size);
+
+      // Actualizar posición
+      x += speedX;
+      y += speedY;
+
+      // Detectar colisiones con los bordes horizontales
+      if (x + size > canvas.width || x < 0) {
+        speedX = -speedX; // invertir dirección horizontal
+      }
+
+      // Detectar colisiones con los bordes verticales
+      if (y + size > canvas.height || y < 0) {
+        speedY = -speedY; // invertir dirección vertical
+      }
+
+      // Volver a llamar la función para animar de nuevo
+      requestAnimationFrame(animateDiagonal);
+    }
+
+    // Iniciar animación
+    animateDiagonal();
+  </script>
+</body>
+</html>
+
